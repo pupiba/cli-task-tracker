@@ -2,36 +2,25 @@ package task
 
 import (
 	"cli-task-tracker/pkg/utils"
-	"fmt"
 	"time"
 )
 
 type Task struct {
-	id          int
-	description string
-	status      string
-	createdAt   time.Time
-	updatedAt   time.Time
+	ID          int    `json:"id"`
+	Description string `json:"description"`
+	Status      string `json:"status"`
+	CreatedAt   string `json:"createdAt"`
+	UpdatedAt   string `json:"updatedAt"`
 }
 
-func NewTask(description string) *Task {
-	now := time.Now()
-	var id int
-
-	if !utils.FileExists("../../tasks.json") {
-		fmt.Println("НЕТУ ФАЙЛА")
-		id = 1
-	}
+func NewTask(id int, description string) *Task {
+	now := utils.FormattedTime(time.Now())
 
 	return &Task{
-		id:          id,
-		description: description,
-		status:      "todo",
-		createdAt:   now,
-		updatedAt:   now,
+		ID:          id,
+		Description: description,
+		Status:      "todo",
+		CreatedAt:   now,
+		UpdatedAt:   now,
 	}
-}
-
-func (t Task) GetTimeNow() string {
-	return t.createdAt.Format("15:04 02.01.2006")
 }

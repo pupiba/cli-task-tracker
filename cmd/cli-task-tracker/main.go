@@ -1,11 +1,21 @@
 package main
 
 import (
-	"cli-task-tracker/internal/task"
+	"cli-task-tracker/pkg/utils"
 	"fmt"
 )
 
 func main() {
-	t := task.NewTask("Задача 1")
-	fmt.Println(t.GetTimeNow())
+
+	utils.InitStorage(fmt.Sprintf("/../../%v", utils.FILENAME))
+
+	// js := task.NewStorageJSON()
+
+	// if err := js.ReadData(); err != nil {
+	// 	fmt.Println(err)
+	// }
+
+	// fmt.Println(js.GetLen())
+
+	// command.Management()
 }
