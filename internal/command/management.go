@@ -41,25 +41,29 @@ func Management(storage *task.StorageJSON) {
 			return
 		}
 		id, _ := strconv.Atoi(os.Args[2])
-		UpdateStatus(storage, id, "mark-in-progress")
+		UpdateStatus(storage, id, "in-progress")
 	case "mark-done":
 		if len_args != 3 {
 			fmt.Println(`Usage: "./task-cli mark-done <ID>"`)
 			return
 		}
 		id, _ := strconv.Atoi(os.Args[2])
-		UpdateStatus(storage, id, "mark-done")
+		UpdateStatus(storage, id, "done")
 	case "list":
 		switch len_args {
 		case 3:
-			//
+			str := os.Args[2]
+			if str == "in-progress" || str == "done" || str == "todo" {
+				GetList(storage, true, str)
+			} else {
+				fmt.Println("Error: incorrect status name")
+			}
 		case 2:
-			//
+			GetList(storage, false, "")
 		default:
 			fmt.Println(`Usage: "./task-cli list" or "./task-cli <STATUS>"`)
 			return
 		}
-		GetList(storage)
 	default:
 
 	}

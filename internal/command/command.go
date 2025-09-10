@@ -57,22 +57,20 @@ func UpdateStatus(storage *task.StorageJSON, id int, status string) {
 
 // List all tasks
 
-func GetList(storage *task.StorageJSON) {
+func GetList(storage *task.StorageJSON, flag bool, data string) {
 	fmt.Println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
-	if storage.GetLen() == 0 {
-		fmt.Println("- - - - - - - - - - - - | N O   T A S K S | - - - - - - - - - - - - -")
-		fmt.Println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
-		return
-	}
 	for _, v := range storage.Data {
-		fmt.Printf("ID: %v\n\"%v\"\nStatus: %v\nCreated at: %v\nUpdated at: %v\n",
-			v.ID, v.Description, v.Status, v.CreatedAt, v.UpdatedAt)
-		fmt.Println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+		if flag {
+			if v.Status == data {
+				fmt.Printf("ID: %v\n\"%v\"\nStatus: %v\nCreated at: %v\nUpdated at: %v\n",
+					v.ID, v.Description, v.Status, v.CreatedAt, v.UpdatedAt)
+				fmt.Println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+			}
+			continue
+		} else {
+			fmt.Printf("ID: %v\n\"%v\"\nStatus: %v\nCreated at: %v\nUpdated at: %v\n",
+				v.ID, v.Description, v.Status, v.CreatedAt, v.UpdatedAt)
+			fmt.Println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+		}
 	}
 }
-
-// List all tasks that are done
-
-// List all tasks that are not done
-
-// List all tasks that are in progres

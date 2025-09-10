@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"encoding/json"
 	"os"
 	"time"
 )
@@ -11,6 +12,9 @@ func InitStorageFile(file string) {
 	if !FileExists(file) {
 		new_file, _ := os.Create(file)
 		defer new_file.Close()
+
+		bytes, _ := json.MarshalIndent([]int{}, "", "\t")
+		new_file.Write(bytes)
 	}
 }
 
