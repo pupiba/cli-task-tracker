@@ -5,11 +5,12 @@ import (
 	"time"
 )
 
-const FILENAME string = "task.json"
+const FILENAME string = "tasks.json"
 
-func InitStorage(filepath string) {
-	if !FileExists(filepath) {
-		os.Create(filepath)
+func InitStorageFile(file string) {
+	if !FileExists(file) {
+		new_file, _ := os.Create(file)
+		defer new_file.Close()
 	}
 }
 

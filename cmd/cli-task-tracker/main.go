@@ -1,21 +1,28 @@
 package main
 
 import (
+	"cli-task-tracker/internal/task"
 	"cli-task-tracker/pkg/utils"
 	"fmt"
 )
 
 func main() {
+	// TODO: Проверить целостность файла
+	utils.InitStorageFile("tasks.json")
 
-	utils.InitStorage(fmt.Sprintf("/../../%v", utils.FILENAME))
+	// TODO: Инициализировать память
+	storage, err := task.NewStorageJSON()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	// Тестовый просмотр структуры
+	fmt.Println(storage)
 
-	// js := task.NewStorageJSON()
+	storage.AddToJSON(task.NewTask(3, "Новая задача!"))
+	storage.WriteData()
 
-	// if err := js.ReadData(); err != nil {
-	// 	fmt.Println(err)
-	// }
+	fmt.Println(storage)
 
-	// fmt.Println(js.GetLen())
-
-	// command.Management()
+	// TODO: Запустить отслеживание команд
 }
